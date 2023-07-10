@@ -11,6 +11,8 @@ class CatalogCategoryProduct extends Model
 
     protected $table = 'catalog_category_product';
 
+    protected $fillable = ['category_id', 'product_id', 'position'];
+
     public function catalogCategoryEntity()
     {
         return $this->belongsTo(CatalogCategoryEntity::class, 'category_id', 'entity_id');

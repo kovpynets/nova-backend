@@ -11,7 +11,9 @@ class StoreGroup extends Model
 
     protected $table = 'store_group';
 
-    protected $primaryKey = 'group_id';
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['website_id', 'name', 'root_category_id', 'default_store_id'];
 
     public function storeWebsite()
     {

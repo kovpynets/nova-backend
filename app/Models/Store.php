@@ -11,7 +11,9 @@ class Store extends Model
 
     protected $table = 'store';
 
-    protected $primaryKey = 'store_id';
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['code', 'website_id', 'group_id', 'name', 'sort_order', 'is_active'];
 
     public function storeWebsite()
     {

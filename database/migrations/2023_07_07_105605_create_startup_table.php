@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('store_website', function (Blueprint $table) {
-            $table->bigIncrements('website_id');
+            $table->id();
             $table->string('code')->unique();
             $table->string('name');
             $table->integer('sort_order');
@@ -22,18 +22,18 @@ return new class extends Migration
         });
 
         Schema::create('store_group', function (Blueprint $table) {
-            $table->bigIncrements('group_id');
+            $table->id();
             $table->unsignedBigInteger('website_id');
             $table->string('name');
             $table->unsignedBigInteger('root_category_id');
             $table->unsignedBigInteger('default_store_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('website_id')->references('website_id')->on('store_website')->onDelete('cascade');
+            $table->foreign('website_id')->references('id')->on('store_website')->onDelete('cascade');
         });
 
         Schema::create('store', function (Blueprint $table) {
-            $table->bigIncrements('store_id');
+            $table->id();
             $table->string('code')->unique();
             $table->unsignedBigInteger('website_id');
             $table->unsignedBigInteger('group_id');
@@ -42,18 +42,18 @@ return new class extends Migration
             $table->boolean('is_active');
             $table->timestamps();
 
-            $table->foreign('website_id')->references('website_id')->on('store_website')->onDelete('cascade');
-            $table->foreign('group_id')->references('group_id')->on('store_group')->onDelete('cascade');
+            $table->foreign('website_id')->references('id')->on('store_website')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('store_group')->onDelete('cascade');
         });
 
         // После создания всех трех таблиц, добавим внешний ключ для `default_group_id`
         Schema::table('store_website', function (Blueprint $table) {
-            $table->foreign('default_group_id')->references('group_id')->on('store_group')->onDelete('set null');
+            $table->foreign('default_group_id')->references('id')->on('store_group')->onDelete('set null');
         });
 
         // Таблицы для продуктов и категорий
         Schema::create('catalog_category_entity', function (Blueprint $table) {
-            $table->bigIncrements('entity_id');
+            $table->id();
             $table->unsignedBigInteger('attribute_set_id');
             $table->unsignedBigInteger('parent_id');
             $table->string('path');
@@ -64,7 +64,7 @@ return new class extends Migration
         });
 
         Schema::create('catalog_product_entity', function (Blueprint $table) {
-            $table->bigIncrements('entity_id');
+            $table->id();
             $table->unsignedBigInteger('attribute_set_id');
             $table->string('type_id');
             $table->string('sku')->unique();
@@ -74,15 +74,16 @@ return new class extends Migration
         });
 
         Schema::create('catalog_category_product', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('position');
 
-            $table->foreign('category_id')->references('entity_id')->on('catalog_category_entity')->onDelete('cascade');
-            $table->foreign('product_id')->references('entity_id')->on('catalog_product_entity')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('catalog_category_entity')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('catalog_product_entity')->onDelete('cascade');
         });
     }
+
 
 
     /**
