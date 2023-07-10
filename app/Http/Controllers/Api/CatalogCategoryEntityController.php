@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CatalogCategoryEntity;
 use Illuminate\Http\Request;
 
 class CatalogCategoryEntityController extends Controller
@@ -12,7 +13,8 @@ class CatalogCategoryEntityController extends Controller
      */
     public function index()
     {
-        //
+        $categories = CatalogCategoryEntity::all();
+        return response()->json($categories, 200);
     }
 
     /**
@@ -20,7 +22,8 @@ class CatalogCategoryEntityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = CatalogCategoryEntity::create($request->all());
+        return response()->json($category, 201);
     }
 
     /**
@@ -28,7 +31,8 @@ class CatalogCategoryEntityController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $category = CatalogCategoryEntity::findOrFail($id);
+        return response()->json($category, 200);
     }
 
     /**
@@ -36,7 +40,9 @@ class CatalogCategoryEntityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = CatalogCategoryEntity::findOrFail($id);
+        $category->update($request->all());
+        return response()->json($category, 200);
     }
 
     /**
@@ -44,6 +50,8 @@ class CatalogCategoryEntityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = CatalogCategoryEntity::findOrFail($id);
+        $category->delete();
+        return response()->json(null, 204);
     }
 }

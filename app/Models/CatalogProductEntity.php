@@ -11,7 +11,7 @@ class CatalogProductEntity extends Model
 
     protected $table = 'catalog_product_entity';
 
-    protected $primaryKey = 'entity_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['attribute_set_id', 'type_id', 'sku', 'has_options', 'required_options'];
 

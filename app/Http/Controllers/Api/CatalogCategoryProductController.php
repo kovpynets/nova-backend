@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CatalogCategoryProduct;
 use Illuminate\Http\Request;
 
 class CatalogCategoryProductController extends Controller
@@ -12,7 +13,8 @@ class CatalogCategoryProductController extends Controller
      */
     public function index()
     {
-        //
+        $categoryProducts = CatalogCategoryProduct::all();
+        return response()->json($categoryProducts, 200);
     }
 
     /**
@@ -20,7 +22,8 @@ class CatalogCategoryProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoryProduct = CatalogCategoryProduct::create($request->all());
+        return response()->json($categoryProduct, 201);
     }
 
     /**
@@ -28,7 +31,8 @@ class CatalogCategoryProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $categoryProduct = CatalogCategoryProduct::findOrFail($id);
+        return response()->json($categoryProduct, 200);
     }
 
     /**
@@ -36,7 +40,9 @@ class CatalogCategoryProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $categoryProduct = CatalogCategoryProduct::findOrFail($id);
+        $categoryProduct->update($request->all());
+        return response()->json($categoryProduct, 200);
     }
 
     /**
@@ -44,6 +50,8 @@ class CatalogCategoryProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $categoryProduct = CatalogCategoryProduct::findOrFail($id);
+        $categoryProduct->delete();
+        return response()->json(null, 204);
     }
 }

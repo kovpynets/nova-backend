@@ -10,6 +10,7 @@ class CatalogCategoryProduct extends Model
     use HasFactory;
 
     protected $table = 'catalog_category_product';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['category_id', 'product_id', 'position'];
 

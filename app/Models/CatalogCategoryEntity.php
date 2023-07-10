@@ -11,7 +11,7 @@ class CatalogCategoryEntity extends Model
 
     protected $table = 'catalog_category_entity';
 
-    protected $primaryKey = 'entity_id';
+    protected $primaryKey = 'id';
 
     protected $fillable = ['attribute_set_id', 'parent_id', 'path', 'position', 'level', 'children_count'];
 
