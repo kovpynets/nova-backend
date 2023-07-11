@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\Eav\EavAttributeSetController;
 use App\Http\Controllers\Api\Eav\EavEntityTypeController;
 use App\Http\Controllers\Api\Eav\EavAttributeGroupController;
 use App\Http\Controllers\Api\Eav\EavEntityAttributeController;
+use App\Http\Controllers\Api\Eav\EavAttributeOptionController;
+use App\Http\Controllers\Api\Eav\EavAttributeOptionValueController;
 use App\Http\Controllers\Api\Eav\CatalogProductEntityVarcharController;
 use App\Http\Controllers\Api\Eav\CatalogProductEntityIntController;
 use App\Http\Controllers\Api\Eav\CatalogProductEntityTextController;
@@ -33,13 +35,10 @@ Route::apiResource('eav-attribute-set', EavAttributeSetController::class);
 Route::apiResource('eav-entity-type', EavEntityTypeController::class);
 Route::apiResource('eav-attribute-group', EavAttributeGroupController::class);
 Route::apiResource('eav-entity-attribute', EavEntityAttributeController::class);
+Route::apiResource('eav-attribute-option', EavAttributeOptionController::class);
+Route::apiResource('eav-entity-option-value', EavAttributeOptionValueController::class);
 Route::apiResource('catalog-product-entity-varchar', CatalogProductEntityVarcharController::class);
 Route::apiResource('catalog-product-entity-int', CatalogProductEntityIntController::class);
 Route::apiResource('catalog-product-entity-text', CatalogProductEntityTextController::class);
 Route::apiResource('catalog-product-entity-decimal', CatalogProductEntityDecimalController::class);
 Route::apiResource('catalog-product-entity-datetime', CatalogProductEntityDatetimeController::class);
-
-Route::prefix('attributes')->group(function () {
-    Route::apiResource('attribute', EavAttributeController::class);
-    Route::apiResource('attribute-set', EavAttributeSetController::class);
-});
