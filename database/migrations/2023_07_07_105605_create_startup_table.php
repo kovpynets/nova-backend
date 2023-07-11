@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Таблица store_group
+// Таблица store_group
         Schema::create('store_group', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('website_id');
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->foreign('website_id')->references('id')->on('store_website')->onDelete('cascade');
         });
 
-        // Таблица store
+// Таблица store
         Schema::create('store', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
@@ -48,16 +48,15 @@ return new class extends Migration
             $table->foreign('group_id')->references('id')->on('store_group')->onDelete('cascade');
         });
 
-        // Внешний ключ для default_group_id в таблице store_website
+// Внешний ключ для default_group_id в таблице store_website
         Schema::table('store_website', function (Blueprint $table) {
             $table->foreign('default_group_id')->references('id')->on('store_group')->onDelete('set null');
         });
 
-        // Таблица catalog_category_entity
+// Таблица catalog_category_entity
         Schema::create('catalog_category_entity', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('attribute_set_id');
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('path');
             $table->integer('position');
             $table->integer('level');
@@ -65,7 +64,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Таблица catalog_product_entity
+// Таблица catalog_product_entity
         Schema::create('catalog_product_entity', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('attribute_set_id');
@@ -76,7 +75,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Таблица catalog_category_product
+// Таблица catalog_category_product
         Schema::create('catalog_category_product', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
@@ -87,7 +86,7 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('catalog_product_entity')->onDelete('cascade');
         });
 
-        // Таблица eav_entity_type
+// Таблица eav_entity_type
         Schema::create('eav_entity_type', function (Blueprint $table) {
             $table->id();
             $table->string('entity_type_code');
@@ -96,7 +95,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Таблица eav_attribute
+// Таблица eav_attribute
         Schema::create('eav_attribute', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
@@ -105,7 +104,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Таблица eav_attribute_label
+// Таблица eav_attribute_label
         Schema::create('eav_attribute_label', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('attribute_id');
@@ -116,7 +115,7 @@ return new class extends Migration
             $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
         });
 
-        // Таблица eav_attribute_set
+// Таблица eav_attribute_set
         Schema::create('eav_attribute_set', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('entity_type_id');
@@ -127,7 +126,7 @@ return new class extends Migration
             $table->foreign('entity_type_id')->references('id')->on('eav_entity_type')->onDelete('cascade');
         });
 
-        // Таблица eav_attribute_group
+// Таблица eav_attribute_group
         Schema::create('eav_attribute_group', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('attribute_set_id');
@@ -138,7 +137,7 @@ return new class extends Migration
             $table->foreign('attribute_set_id')->references('id')->on('eav_attribute_set')->onDelete('cascade');
         });
 
-        // Таблица eav_entity_attribute
+// Таблица eav_entity_attribute
         Schema::create('eav_entity_attribute', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('entity_type_id');
@@ -154,6 +153,71 @@ return new class extends Migration
             $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
         });
 
+// Таблица catalog_product_entity_varchar
+        Schema::create('catalog_product_entity_varchar', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('store_id')->default(0);
+            $table->string('value');
+            $table->timestamps();
+
+            $table->foreign('entity_id')->references('id')->on('catalog_product_entity')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
+        });
+
+// Таблица catalog_product_entity_int
+        Schema::create('catalog_product_entity_int', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('store_id')->default(0);
+            $table->integer('value');
+            $table->timestamps();
+
+            $table->foreign('entity_id')->references('id')->on('catalog_product_entity')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
+        });
+
+// Таблица catalog_product_entity_text
+        Schema::create('catalog_product_entity_text', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('store_id')->default(0);
+            $table->text('value');
+            $table->timestamps();
+
+            $table->foreign('entity_id')->references('id')->on('catalog_product_entity')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
+        });
+
+// Таблица catalog_product_entity_decimal
+        Schema::create('catalog_product_entity_decimal', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('store_id')->default(0);
+            $table->decimal('value', 12, 4);
+            $table->timestamps();
+
+            $table->foreign('entity_id')->references('id')->on('catalog_product_entity')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
+        });
+
+// Таблица catalog_product_entity_datetime
+        Schema::create('catalog_product_entity_datetime', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('entity_id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->unsignedBigInteger('store_id')->default(0);
+            $table->dateTime('value');
+            $table->timestamps();
+
+            $table->foreign('entity_id')->references('id')->on('catalog_product_entity')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -161,74 +225,22 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Удаляем внешние ключи и таблицы в обратном порядке
-
-        // eav_entity_attribute
-        Schema::table('eav_entity_attribute', function (Blueprint $table) {
-            $table->dropForeign(['entity_type_id', 'attribute_set_id', 'attribute_group_id', 'attribute_id']);
-        });
+        Schema::dropIfExists('catalog_product_entity_datetime');
+        Schema::dropIfExists('catalog_product_entity_decimal');
+        Schema::dropIfExists('catalog_product_entity_text');
+        Schema::dropIfExists('catalog_product_entity_int');
+        Schema::dropIfExists('catalog_product_entity_varchar');
         Schema::dropIfExists('eav_entity_attribute');
-
-        // eav_attribute_group
-        Schema::table('eav_attribute_group', function (Blueprint $table) {
-            $table->dropForeign(['attribute_set_id']);
-        });
         Schema::dropIfExists('eav_attribute_group');
-
-        // eav_attribute_set
-        Schema::table('eav_attribute_set', function (Blueprint $table) {
-            $table->dropForeign(['entity_type_id']);
-        });
         Schema::dropIfExists('eav_attribute_set');
-
-        // eav_attribute_label
-        Schema::table('eav_attribute_label', function (Blueprint $table) {
-            $table->dropForeign(['attribute_id']);
-        });
         Schema::dropIfExists('eav_attribute_label');
-
-        // eav_attribute
         Schema::dropIfExists('eav_attribute');
-
-        // eav_entity_type
         Schema::dropIfExists('eav_entity_type');
-
-        // catalog_category_product
-        Schema::table('catalog_category_product', function (Blueprint $table) {
-            $table->dropForeign(['category_id', 'product_id']);
-        });
         Schema::dropIfExists('catalog_category_product');
-
-        // catalog_product_entity
-        Schema::table('catalog_product_entity', function (Blueprint $table) {
-            $table->dropForeign(['attribute_set_id']);
-        });
         Schema::dropIfExists('catalog_product_entity');
-
-        // catalog_category_entity
-        Schema::table('catalog_category_entity', function (Blueprint $table) {
-            $table->dropForeign(['attribute_set_id']);
-        });
         Schema::dropIfExists('catalog_category_entity');
-
-        // store
-        Schema::table('store', function (Blueprint $table) {
-            $table->dropForeign(['website_id', 'group_id']);
-        });
         Schema::dropIfExists('store');
-
-        // store_group
-        Schema::table('store_group', function (Blueprint $table) {
-            $table->dropForeign(['website_id']);
-        });
         Schema::dropIfExists('store_group');
-
-        // store_website
-        Schema::table('store_website', function (Blueprint $table) {
-            $table->dropForeign(['default_group_id']);
-        });
         Schema::dropIfExists('store_website');
     }
-
-
 };

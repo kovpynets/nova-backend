@@ -8,48 +8,33 @@ use Illuminate\Http\Request;
 
 class EavEntityTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return EavEntityType::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $entityType = EavEntityType::create($request->all());
-        return $entityType;
+        $eavEntityType = EavEntityType::create($request->all());
+        return $eavEntityType;
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         return EavEntityType::find($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $entityType = EavEntityType::find($id);
-        $entityType->update($request->all());
-        return $entityType;
+        $eavEntityType = EavEntityType::find($id);
+        $eavEntityType->update($request->all());
+        return $eavEntityType;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $entityType = EavEntityType::find($id);
-        $entityType->delete();
+        $eavEntityType = EavEntityType::find($id);
+        $eavEntityType->delete();
         return response()->json(['message' => 'Deleted successfully']);
     }
 }

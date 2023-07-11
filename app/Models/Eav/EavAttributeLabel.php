@@ -10,11 +10,13 @@ class EavAttributeLabel extends Model
     use HasFactory;
 
     protected $table = 'eav_attribute_label';
+
     protected $primaryKey = 'id';
+
     protected $fillable = ['attribute_id', 'locale', 'label'];
 
     public function attribute()
     {
-        return $this->belongsTo(EavAttribute::class, 'attribute_id');
+        return $this->belongsTo(EavAttribute::class, 'attribute_id', 'id');
     }
 }

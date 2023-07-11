@@ -10,16 +10,13 @@ class EavAttributeSet extends Model
     use HasFactory;
 
     protected $table = 'eav_attribute_set';
+
     protected $primaryKey = 'id';
-    protected $fillable = ['entity_type_id', 'attribute_set_name', 'sort_order']; // Добавьте другие необходимые столбцы
+
+    protected $fillable = ['entity_type_id', 'attribute_set_name', 'sort_order'];
 
     public function entityType()
     {
-        return $this->belongsTo(EavEntityType::class, 'entity_type_id');
-    }
-
-    public function attributeGroups()
-    {
-        return $this->hasMany(EavAttributeGroup::class, 'attribute_set_id');
+        return $this->belongsTo(EavEntityType::class, 'entity_type_id', 'id');
     }
 }

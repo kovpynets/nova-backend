@@ -68,3 +68,101 @@ php artisan make:seeder EavAttributeLabelTableSeeder
 php artisan make:seeder EavAttributeSetTableSeeder
 
 
+
+
+php artisan make:model Store/StoreWebsite
+php artisan make:model Store/StoreGroup
+php artisan make:model Store/Store
+php artisan make:model Catalog/CatalogCategoryEntity
+php artisan make:model Catalog/CatalogProductEntity
+php artisan make:model Catalog/CatalogCategoryProduct
+php artisan make:model Catalog/CatalogProductEntityVarchar
+php artisan make:model Catalog/CatalogProductEntityInt
+php artisan make:model Catalog/CatalogProductEntityText
+php artisan make:model Catalog/CatalogProductEntityDecimal
+php artisan make:model Catalog/CatalogProductEntityDatetime
+php artisan make:model Eav/EavEntityType
+php artisan make:model Eav/EavAttribute
+php artisan make:model Eav/EavAttributeLabel
+php artisan make:model Eav/EavAttributeSet
+php artisan make:model Eav/EavAttributeGroup
+php artisan make:model Eav/EavEntityAttribute
+
+php artisan make:controller Api/Store/StoreWebsiteController --api
+php artisan make:controller Api/Store/StoreGroupController --api
+php artisan make:controller Api/Store/StoreController --api
+php artisan make:controller Api/Catalog/CatalogCategoryEntityController --api
+php artisan make:controller Api/Catalog/CatalogProductEntityController --api
+php artisan make:controller Api/Catalog/CatalogCategoryProductController --api
+php artisan make:controller Api/Eav/CatalogProductEntityVarcharController --api
+php artisan make:controller Api/Eav/CatalogProductEntityIntController --api
+php artisan make:controller Api/Eav/CatalogProductEntityTextController --api
+php artisan make:controller Api/Eav/CatalogProductEntityDecimalController --api
+php artisan make:controller Api/Eav/CatalogProductEntityDatetimeController --api
+php artisan make:controller Api/Eav/EavEntityTypeController --api
+php artisan make:controller Api/Eav/EavAttributeController --api
+php artisan make:controller Api/Eav/EavAttributeLabelController --api
+php artisan make:controller Api/Eav/EavAttributeSetController --api
+php artisan make:controller Api/Eav/EavAttributeGroupController --api
+php artisan make:controller Api/Eav/EavEntityAttributeController --api
+
+protected $table = 'catalog_category_product';
+protected $primaryKey = 'id';
+protected $fillable = ['category_id', 'product_id', 'position'];
+
+
+<?php
+
+namespace App\Http\Controllers\Api\Eav;
+
+use App\Http\Controllers\Controller;
+use App\Models\Eav\EavAttribute;
+use Illuminate\Http\Request;
+
+class EavAttributeController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return EavAttribute::all();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $attribute = EavAttribute::create($request->all());
+        return $attribute;
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        return EavAttribute::find($id);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $attribute = EavAttribute::find($id);
+        $attribute->update($request->all());
+        return $attribute;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $attribute = EavAttribute::find($id);
+        $attribute->delete();
+        return response()->json(['message' => 'Deleted successfully']);
+    }
+}

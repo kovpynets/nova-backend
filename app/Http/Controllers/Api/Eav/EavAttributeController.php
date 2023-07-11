@@ -8,48 +8,33 @@ use Illuminate\Http\Request;
 
 class EavAttributeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return EavAttribute::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $attribute = EavAttribute::create($request->all());
-        return $attribute;
+        $eavAttribute = EavAttribute::create($request->all());
+        return $eavAttribute;
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         return EavAttribute::find($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $attribute = EavAttribute::find($id);
-        $attribute->update($request->all());
-        return $attribute;
+        $eavAttribute = EavAttribute::find($id);
+        $eavAttribute->update($request->all());
+        return $eavAttribute;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $attribute = EavAttribute::find($id);
-        $attribute->delete();
+        $eavAttribute = EavAttribute::find($id);
+        $eavAttribute->delete();
         return response()->json(['message' => 'Deleted successfully']);
     }
 }

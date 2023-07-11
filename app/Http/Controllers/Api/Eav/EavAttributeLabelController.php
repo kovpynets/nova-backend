@@ -8,48 +8,33 @@ use Illuminate\Http\Request;
 
 class EavAttributeLabelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return EavAttributeLabel::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $attributeLabel = EavAttributeLabel::create($request->all());
-        return $attributeLabel;
+        $eavAttributeLabel = EavAttributeLabel::create($request->all());
+        return $eavAttributeLabel;
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         return EavAttributeLabel::find($id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $attributeLabel = EavAttributeLabel::find($id);
-        $attributeLabel->update($request->all());
-        return $attributeLabel;
+        $eavAttributeLabel = EavAttributeLabel::find($id);
+        $eavAttributeLabel->update($request->all());
+        return $eavAttributeLabel;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $attributeLabel = EavAttributeLabel::find($id);
-        $attributeLabel->delete();
+        $eavAttributeLabel = EavAttributeLabel::find($id);
+        $eavAttributeLabel->delete();
         return response()->json(['message' => 'Deleted successfully']);
     }
 }

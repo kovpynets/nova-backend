@@ -10,11 +10,18 @@ class StoreGroup extends Model
     use HasFactory;
 
     protected $table = 'store_group';
+
     protected $primaryKey = 'id';
+
     protected $fillable = ['website_id', 'name', 'root_category_id', 'default_store_id'];
 
-    public function storeWebsite()
+    public function website()
     {
-        return $this->belongsTo(StoreWebsite::class, 'website_id');
+        return $this->belongsTo(StoreWebsite::class, 'website_id', 'id');
+    }
+
+    public function stores()
+    {
+        return $this->hasMany(Store::class, 'group_id', 'id');
     }
 }
