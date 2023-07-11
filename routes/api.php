@@ -39,3 +39,7 @@ Route::apiResource('catalog-product-entity-text', CatalogProductEntityTextContro
 Route::apiResource('catalog-product-entity-decimal', CatalogProductEntityDecimalController::class);
 Route::apiResource('catalog-product-entity-datetime', CatalogProductEntityDatetimeController::class);
 
+Route::prefix('attributes')->group(function () {
+    Route::apiResource('attribute', EavAttributeController::class);
+    Route::apiResource('attribute-set', EavAttributeSetController::class);
+});
