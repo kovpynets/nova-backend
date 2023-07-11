@@ -38,6 +38,12 @@ php artisan make:model Eav/EavAttribute
 php artisan make:model Eav/EavAttributeLabel
 php artisan make:model Eav/EavAttributeSet
 
+php artisan make:model Eav/EavAttributeGroup
+php artisan make:model Eav/EavEntityAttribute
+
+php artisan make:controller Api/Eav/EavAttributeGroupController --api
+php artisan make:controller Api/Eav/EavEntityAttributeController --api
+
 php artisan make:controller Api/Store/StoreWebsiteController --api
 php artisan make:controller Api/Store/StoreGroupController --api
 php artisan make:controller Api/Store/StoreController --api

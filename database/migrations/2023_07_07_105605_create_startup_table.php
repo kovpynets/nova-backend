@@ -121,19 +121,36 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('entity_type_id');
             $table->string('attribute_set_name');
-            // Добавьте другие необходимые столбцы для eav_attribute_set
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
 
             $table->foreign('entity_type_id')->references('id')->on('eav_entity_type')->onDelete('cascade');
         });
 
-        // Таблица eav_attribute_set_attribute
-        Schema::create('eav_attribute_set_attribute', function (Blueprint $table) {
+        // Таблица eav_attribute_group
+        Schema::create('eav_attribute_group', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('attribute_set_id');
-            $table->unsignedBigInteger('attribute_id');
-            $table->integer('sort_order');
+            $table->string('attribute_group_name');
+            $table->integer('sort_order')->default(0);
+            $table->timestamps();
 
             $table->foreign('attribute_set_id')->references('id')->on('eav_attribute_set')->onDelete('cascade');
+        });
+
+        // Таблица eav_entity_attribute
+        Schema::create('eav_entity_attribute', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('entity_type_id');
+            $table->unsignedBigInteger('attribute_set_id');
+            $table->unsignedBigInteger('attribute_group_id');
+            $table->unsignedBigInteger('attribute_id');
+            $table->integer('sort_order')->default(0);
+            $table->timestamps();
+
+            $table->foreign('entity_type_id')->references('id')->on('eav_entity_type')->onDelete('cascade');
+            $table->foreign('attribute_set_id')->references('id')->on('eav_attribute_set')->onDelete('cascade');
+            $table->foreign('attribute_group_id')->references('id')->on('eav_attribute_group')->onDelete('cascade');
             $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
         });
 
@@ -146,11 +163,17 @@ return new class extends Migration
     {
         // Удаляем внешние ключи и таблицы в обратном порядке
 
-        // eav_attribute_set_attribute
-        Schema::table('eav_attribute_set_attribute', function (Blueprint $table) {
-            $table->dropForeign(['attribute_set_id', 'attribute_id']);
+        // eav_entity_attribute
+        Schema::table('eav_entity_attribute', function (Blueprint $table) {
+            $table->dropForeign(['entity_type_id', 'attribute_set_id', 'attribute_group_id', 'attribute_id']);
         });
-        Schema::dropIfExists('eav_attribute_set_attribute');
+        Schema::dropIfExists('eav_entity_attribute');
+
+        // eav_attribute_group
+        Schema::table('eav_attribute_group', function (Blueprint $table) {
+            $table->dropForeign(['attribute_set_id']);
+        });
+        Schema::dropIfExists('eav_attribute_group');
 
         // eav_attribute_set
         Schema::table('eav_attribute_set', function (Blueprint $table) {
