@@ -55,17 +55,11 @@ php artisan make:controller Api/Eav/EavAttributeController --api
 php artisan make:controller Api/Eav/EavAttributeLabelController --api
 php artisan make:controller Api/Eav/EavAttributeSetController --api
 
+php artisan make:model Eav/EavAttributeOption
+php artisan make:model Eav/EavAttributeOptionValue
 
-php artisan make:seeder StoreWebsiteTableSeeder
-php artisan make:seeder StoreGroupTableSeeder
-php artisan make:seeder StoreTableSeeder
-php artisan make:seeder CatalogCategoryEntityTableSeeder
-php artisan make:seeder CatalogProductEntityTableSeeder
-php artisan make:seeder CatalogCategoryProductTableSeeder
-php artisan make:seeder EavEntityTypeTableSeeder
-php artisan make:seeder EavAttributeTableSeeder
-php artisan make:seeder EavAttributeLabelTableSeeder
-php artisan make:seeder EavAttributeSetTableSeeder
+php artisan make:controller Api/Eav/EavAttributeOptionController --api
+php artisan make:controller Api/Eav/EavAttributeOptionValueController --api
 
 
 
@@ -257,3 +251,7 @@ VALUES (1, 1, 0, 'Product 1', NOW(), NOW()),
        (3, 2, 0, '30.00', NOW(), NOW()),
        (4, 1, 0, 'Product 4', NOW(), NOW()),
        (4, 2, 0, '40.00', NOW(), NOW());
+
+
+Добавь к моей миграции и связи таблицы eav_attribute_option, eav_attribute_option_value как у magento 2:
+

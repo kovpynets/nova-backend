@@ -218,6 +218,28 @@ return new class extends Migration
             $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
         });
 
+        // Таблица eav_attribute_option
+        Schema::create('eav_attribute_option', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('attribute_id');
+            $table->integer('sort_order');
+            // Добавьте другие необходимые столбцы для eav_attribute_option
+            $table->timestamps();
+
+            $table->foreign('attribute_id')->references('id')->on('eav_attribute')->onDelete('cascade');
+        });
+
+// Таблица eav_attribute_option_value
+        Schema::create('eav_attribute_option_value', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('option_id');
+            $table->string('locale');
+            $table->string('value');
+            $table->timestamps();
+
+            $table->foreign('option_id')->references('id')->on('eav_attribute_option')->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -230,6 +252,8 @@ return new class extends Migration
         Schema::dropIfExists('catalog_product_entity_text');
         Schema::dropIfExists('catalog_product_entity_int');
         Schema::dropIfExists('catalog_product_entity_varchar');
+        Schema::dropIfExists('eav_attribute_option');
+        Schema::dropIfExists('eav_attribute_option_value');
         Schema::dropIfExists('eav_entity_attribute');
         Schema::dropIfExists('eav_attribute_group');
         Schema::dropIfExists('eav_attribute_set');
