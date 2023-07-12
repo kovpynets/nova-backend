@@ -23,22 +23,29 @@ use App\Http\Controllers\Api\Eav\CatalogProductEntityTextController;
 use App\Http\Controllers\Api\Eav\CatalogProductEntityDecimalController;
 use App\Http\Controllers\Api\Eav\CatalogProductEntityDatetimeController;
 
-Route::apiResource('website', StoreWebsiteController::class);
-Route::apiResource('store-group', StoreGroupController::class);
-Route::apiResource('store', StoreController::class);
-Route::apiResource('category', CatalogCategoryEntityController::class);
-Route::apiResource('product', CatalogProductEntityController::class);
-Route::apiResource('category-product', CatalogCategoryProductController::class);
-Route::apiResource('eav-attribute', EavAttributeController::class);
-Route::apiResource('eav-attribute-label', EavAttributeLabelController::class);
-Route::apiResource('eav-attribute-set', EavAttributeSetController::class);
-Route::apiResource('eav-entity-type', EavEntityTypeController::class);
-Route::apiResource('eav-attribute-group', EavAttributeGroupController::class);
-Route::apiResource('eav-entity-attribute', EavEntityAttributeController::class);
-Route::apiResource('eav-attribute-option', EavAttributeOptionController::class);
-Route::apiResource('eav-entity-option-value', EavAttributeOptionValueController::class);
-Route::apiResource('catalog-product-entity-varchar', CatalogProductEntityVarcharController::class);
-Route::apiResource('catalog-product-entity-int', CatalogProductEntityIntController::class);
-Route::apiResource('catalog-product-entity-text', CatalogProductEntityTextController::class);
-Route::apiResource('catalog-product-entity-decimal', CatalogProductEntityDecimalController::class);
-Route::apiResource('catalog-product-entity-datetime', CatalogProductEntityDatetimeController::class);
+// Группа маршрутов для 'store'
+Route::group(['prefix' => 'core'], function () {
+    // Группа маршрутов для 'store'
+    Route::apiResource('store-website', StoreWebsiteController::class);
+    Route::apiResource('store-group', StoreGroupController::class);
+    Route::apiResource('store', StoreController::class);
+    // Группа маршрутов для 'catalog'
+    Route::apiResource('catalog-category-entity', CatalogCategoryEntityController::class);
+    Route::apiResource('catalog-product-entity', CatalogProductEntityController::class);
+    Route::apiResource('catalog-category-product', CatalogCategoryProductController::class);
+    Route::apiResource('catalog-product-entity-varchar', CatalogProductEntityVarcharController::class);
+    Route::apiResource('catalog-product-entity-int', CatalogProductEntityIntController::class);
+    Route::apiResource('catalog-product-entity-text', CatalogProductEntityTextController::class);
+    Route::apiResource('catalog-product-entity-decimal', CatalogProductEntityDecimalController::class);
+    Route::apiResource('catalog-product-entity-datetime', CatalogProductEntityDatetimeController::class);
+    // Группа маршрутов для 'eav'
+    Route::apiResource('eav-attribute', EavAttributeController::class);
+    Route::apiResource('eav-attribute-label', EavAttributeLabelController::class);
+    Route::apiResource('eav-attribute-set', EavAttributeSetController::class);
+    Route::apiResource('eav-entity-type', EavEntityTypeController::class);
+    Route::apiResource('eav-attribute-group', EavAttributeGroupController::class);
+    Route::apiResource('eav-entity-attribute', EavEntityAttributeController::class);
+    Route::apiResource('eav-attribute-option', EavAttributeOptionController::class);
+    Route::apiResource('eav-entity-option-value', EavAttributeOptionValueController::class);
+});
+
