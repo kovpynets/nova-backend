@@ -41,10 +41,10 @@ VALUES
 ('entity_type_code2', 'Entity Type 2', NOW(), NOW());
 
 -- Заполнение таблицы eav_attribute
-INSERT INTO eav_attribute (code, frontend_label, created_at, updated_at)
+INSERT INTO eav_attribute (code, frontend_label, attribute_code, attribute_model, backend_model, backend_type, backend_table, frontend_model, frontend_input, frontend_class, source_model, is_required, is_user_defined, default_value, is_unique, note, position, is_global, is_visible, is_searchable, is_filterable, is_comparable, is_visible_on_front, is_wysiwyg_enabled, default_frontend_label, default_frontend_input, default_frontend_class, default_source_model, data_model, sort_order, is_used_in_grid, is_visible_in_grid, is_filterable_in_grid, search_weight, additional_data, created_at, updated_at)
 VALUES
-('attribute_code1', 'Attribute 1', NOW(), NOW()),
-('attribute_code2', 'Attribute 2', NOW(), NOW());
+('attribute_code1', 'Attribute 1', 'attribute_code1', NULL, NULL, 'varchar', NULL, NULL, 'text', NULL, NULL, 0, 0, NULL, 0, NULL, 0, 1, 1, 1, 1, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL, NOW(), NOW()),
+('attribute_code2', 'Attribute 2', 'attribute_code2', NULL, NULL, 'varchar', NULL, NULL, 'text', NULL, NULL, 0, 0, NULL, 0, NULL, 0, 1, 1, 1, 1, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, NULL, NOW(), NOW());
 
 -- Заполнение таблицы eav_attribute_label
 INSERT INTO eav_attribute_label (attribute_id, locale, label, created_at, updated_at)
