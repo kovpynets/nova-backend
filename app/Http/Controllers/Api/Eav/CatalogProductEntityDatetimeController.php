@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Eav;
 
 use App\Http\Controllers\Controller;
+use App\Models\Catalog\CatalogProductEntityDatetime;
 use Illuminate\Http\Request;
 
 class CatalogProductEntityDatetimeController extends Controller
