@@ -13,7 +13,8 @@ class EavAttributeOptionController extends Controller
      */
     public function index()
     {
-        return EavAttributeOption::with('values')->get();
+        //return EavAttributeOption::with('values')->get();
+        return EavAttributeOption::all();
     }
 
     /**
@@ -30,7 +31,8 @@ class EavAttributeOptionController extends Controller
      */
     public function show(string $id)
     {
-        return EavAttributeOption::with('values')->find($id);
+        //return EavAttributeOption::with('values')->find($id);
+        return EavAttributeOption::find($id);
     }
 
     /**
