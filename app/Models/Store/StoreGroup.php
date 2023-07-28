@@ -13,7 +13,7 @@ class StoreGroup extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['website_id', 'name', 'root_category_id', 'default_store_id'];
+    protected $fillable = ['website_id', 'code', 'name', 'root_category_id', 'default_store_id'];
 
     public function website()
     {

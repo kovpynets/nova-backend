@@ -25,6 +25,7 @@ return new class extends Migration
         Schema::create('store_group', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('website_id');
+            $table->string('code')->unique();
             $table->string('name');
             $table->unsignedBigInteger('root_category_id');
             $table->unsignedBigInteger('default_store_id')->nullable();

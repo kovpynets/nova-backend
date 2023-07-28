@@ -10,7 +10,9 @@ class StoreController extends Controller
 {
     public function index()
     {
-        return Store::all();
+        //return Store::all();
+        $stores = Store::with('website', 'group')->get();
+        return $stores;
     }
 
     public function store(Request $request)
@@ -31,10 +33,17 @@ class StoreController extends Controller
         return $store;
     }
 
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
         $store = Store::find($id);
-        $store->delete();
-        return response()->json(['message' => 'Deleted successfully']);
+
+        if ($store) {
+            $store->delete();
+            return $store; // Или можно вернуть любой другой ответ, который вы хотите отправить обратно
+        } else {
+            return response()->json(['error' => 'Store not found'], 404);
+        }
     }
+
+
 }

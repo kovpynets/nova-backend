@@ -113,3 +113,16 @@ Price
 Media Image
 
 
+PATH=/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php8.0.8/bin:$PATH
+PATH=/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php8.1.13/bin:$PATH
+PATH=/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php8.2.0/bin:$PATH
+
+
+PROstavochka
+(Code: prostavochka)
+
+PROstavochka Store
+(Code: prostavochka_store)
+
+PROstavochka UA
+(Code: prostavochka_ua)
