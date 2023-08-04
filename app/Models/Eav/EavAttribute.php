@@ -14,7 +14,6 @@ class EavAttribute extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'code',
         'frontend_label',
         'attribute_code',
         'backend_model',
@@ -72,4 +71,15 @@ class EavAttribute extends Model
         'is_used_in_form_post_data',
         'frontend_input_renderer',
     ];
+
+    public function attributeLabels()
+    {
+        return $this->hasMany(EavAttributeLabel::class, 'attribute_id', 'id');
+    }
+
+   // public function options()
+   // {
+   //     return $this->hasMany(EavAttributeOption::class, 'attribute_id', 'id');
+   // }
+
 }

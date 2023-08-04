@@ -100,7 +100,7 @@ return new class extends Migration
         // Таблица eav_attribute
         Schema::create('eav_attribute', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            //$table->string('code')->unique();
             $table->string('frontend_label');
             $table->string('attribute_code');
             $table->string('attribute_model')->nullable();
@@ -112,7 +112,7 @@ return new class extends Migration
             $table->string('frontend_class')->nullable();
             $table->string('source_model')->nullable();
             $table->boolean('is_required');
-            $table->boolean('is_user_defined');
+            $table->boolean('is_user_defined')->default(0);
             $table->string('default_value')->nullable();
             $table->boolean('is_unique');
             $table->string('note')->nullable();
@@ -130,9 +130,9 @@ return new class extends Migration
             $table->string('default_source_model')->nullable();
             $table->string('data_model')->nullable();
             $table->integer('sort_order')->nullable();
-            $table->boolean('is_used_in_grid');
-            $table->boolean('is_visible_in_grid');
-            $table->boolean('is_filterable_in_grid');
+            $table->boolean('is_used_in_grid')->default(0);
+            $table->boolean('is_visible_in_grid')->default(0);;
+            $table->boolean('is_filterable_in_grid')->default(0);;
             $table->decimal('search_weight', 12, 4)->nullable();
             $table->text('additional_data')->nullable();
             $table->timestamps();
@@ -274,7 +274,6 @@ return new class extends Migration
 
             $table->foreign('option_id')->references('id')->on('eav_attribute_option')->onDelete('cascade');
         });
-
     }
 
     /**

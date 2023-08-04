@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Eav;
 
 use App\Http\Controllers\Controller;
 use App\Models\Eav\EavAttributeOption;
+use App\Models\Eav\EavAttributeOptionValue;
 use Illuminate\Http\Request;
 
 class EavAttributeOptionController extends Controller
@@ -13,8 +14,7 @@ class EavAttributeOptionController extends Controller
      */
     public function index()
     {
-        //return EavAttributeOption::with('values')->get();
-        return EavAttributeOption::all();
+        return EavAttributeOption::with('values')->get();
     }
 
     /**
@@ -23,6 +23,18 @@ class EavAttributeOptionController extends Controller
     public function store(Request $request)
     {
         $eavAttributeOption = EavAttributeOption::create($request->all());
+
+        // If there are values, store them as well
+        if($request->has('values')) {
+            foreach($request->get('values') as $value) {
+                EavAttributeOptionValue::create([
+                    'option_id' => $eavAttributeOption->id,
+                    'locale' => $value['locale'],
+                    'value' => $value['value']
+                ]);
+            }
+        }
+
         return $eavAttributeOption;
     }
 
@@ -31,8 +43,7 @@ class EavAttributeOptionController extends Controller
      */
     public function show(string $id)
     {
-        //return EavAttributeOption::with('values')->find($id);
-        return EavAttributeOption::find($id);
+        return EavAttributeOption::with('values')->find($id);
     }
 
     /**
@@ -40,8 +51,21 @@ class EavAttributeOptionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $eavAttributeOption = EavAttributeOption::find($id);
+        $eavAttributeOption = EavAttributeOption::with('values')->find($id);
         $eavAttributeOption->update($request->all());
+
+        // If there are values, update them as well
+        if($request->has('values')) {
+            foreach($request->get('values') as $value) {
+                $optionValue = EavAttributeOptionValue::where('option_id', $eavAttributeOption->id)
+                    ->where('locale', $value['locale'])
+                    ->first();
+                if($optionValue) {
+                    $optionValue->update(['value' => $value['value']]);
+                }
+            }
+        }
+
         return $eavAttributeOption;
     }
 
@@ -50,8 +74,15 @@ class EavAttributeOptionController extends Controller
      */
     public function destroy(string $id)
     {
-        $eavAttributeOption = EavAttributeOption::find($id);
+        $eavAttributeOption = EavAttributeOption::with('values')->find($id);
+
+        // Delete the option values as well
+        foreach($eavAttributeOption->values as $value) {
+            $value->delete();
+        }
+
         $eavAttributeOption->delete();
+
         return response()->json(['message' => 'Deleted successfully']);
     }
 }
