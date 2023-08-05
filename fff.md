@@ -1,16 +1,21 @@
-Колесные проставки для Chevrolet
+Атрибуты:
 
-Колесные проставки для Chevrolet ≡ ПРОставочка
-Купить колесные проставки для Chevrolet. Высококачественные алюминиевые колесные проставки для дисков на Шевроле. ⭐ Подбор Марка/Модель. ⚡ Установка. ✅ Гарантия. ✈️ Доставка по Украине.
+Получение списка атрибутов: GET /api/core/eav-attribute
+Получение конкретного атрибута: GET /api/core/eav-attribute/{attributeId}
+Создание атрибута: POST /api/core/eav-attribute
+Обновление атрибута: PUT /api/core/eav-attribute/{attributeId}
+Удаление атрибута: DELETE /api/core/eav-attribute/{attributeId}
+Опции атрибутов:
 
+Получение списка опций для атрибута: GET /api/core/eav-attribute/{id}/options
+Получение конкретной опции для атрибута: GET /api/core/eav-attribute/{attributeId}/options/{optionId}
+Создание опции для атрибута: POST /api/core/eav-attribute/{attributeId}/options
+Обновление опции для атрибута: PUT /api/core/eav-attribute/{attributeId}/options/{optionId}
+Удаление опции для атрибута: DELETE /api/core/eav-attribute/{attributeId}/options/{optionId}
+Значения опций:
 
-
-Колесные проставки для Chevrolet AVEO T255 2006-2011
-
-Колесные проставки для Chevrolet AVEO T255 2006-2011 ≡ ПРОставочка
-Купить колесные проставки для Chevrolet AVEO T255 2006-2011. Высококачественные алюминиевые колесные проставки для вылета колес на Шевроле АВЕО T255. ⭐ Подбор Марка/Модель. ⚡ Установка. ✅ Гарантия. ✈️ Доставка по Украине.
-
-Колісні проставки для Chevrolet AVEO T255 2006-2011 ≡ ПРОставочка
-Купити колісні проставки для Chevrolet AVEO T255 2006-2011. Високоякісні алюмінієві колісні проставки для виносу коліс на Chevrolet АВЕО T255. ⭐ Підбір Марка/Модель. ⚡ Встановлення. ✅ Гарантія. ✈️ Доставка по Україні.
-
-Колесные проставки для Chevrolet AVEO T255 2006-2011
+Получение списка значений для опции: GET /api/core/eav-attribute/{attributeId}/options/{optionId}/values
+Получение конкретного значения для опции: GET /api/core/eav-attribute/{attributeId}/options/{optionId}/values/{valueId}
+Создание значения для опции: POST /api/core/eav-attribute/{attributeId}/options/{optionId}/values
+Обновление значения для опции: PUT /api/core/eav-attribute/{attributeId}/options/{optionId}/values/{valueId}
+Удаление значения для опции: DELETE /api/core/eav-attribute/{attributeId}/options/{optionId}/values/{valueId}

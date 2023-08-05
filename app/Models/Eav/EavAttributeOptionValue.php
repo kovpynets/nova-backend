@@ -13,7 +13,7 @@ class EavAttributeOptionValue extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['option_id', 'store_id', 'value'];
+    protected $fillable = ['option_id', 'store_id', 'value', 'locale'];
 
     public function option()
     {

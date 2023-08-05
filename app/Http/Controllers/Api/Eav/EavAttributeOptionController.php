@@ -16,7 +16,6 @@ class EavAttributeOptionController extends Controller
     {
         return EavAttributeOption::with('values')->get();
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -37,7 +36,6 @@ class EavAttributeOptionController extends Controller
 
         return $eavAttributeOption;
     }
-
     /**
      * Display the specified resource.
      */
@@ -45,7 +43,6 @@ class EavAttributeOptionController extends Controller
     {
         return EavAttributeOption::with('values')->find($id);
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -68,7 +65,6 @@ class EavAttributeOptionController extends Controller
 
         return $eavAttributeOption;
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -85,4 +81,5 @@ class EavAttributeOptionController extends Controller
 
         return response()->json(['message' => 'Deleted successfully']);
     }
+
 }

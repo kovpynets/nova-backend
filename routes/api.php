@@ -39,7 +39,24 @@ Route::group(['prefix' => 'core'], function () {
     Route::apiResource('catalog-product-entity-decimal', CatalogProductEntityDecimalController::class);
     Route::apiResource('catalog-product-entity-datetime', CatalogProductEntityDatetimeController::class);
     // Группа маршрутов для 'eav'
+    // Группа маршрутов для 'eav-attribute'
     Route::apiResource('eav-attribute', EavAttributeController::class);
+    Route::prefix('eav-attribute')->group(function () {
+
+        //Route::apiResource('/', EavAttributeController::class);
+        // Вложенные маршруты для 'eav-attribute-option'
+        Route::get('{attributeId}/options', [EavAttributeController::class, 'getOptionsByAttribute']);
+        Route::get('{attributeId}/options/{optionId}', [EavAttributeController::class, 'getOptionByAttribute']);
+        Route::post('{attributeId}/options', [EavAttributeController::class, 'storeOptionForAttribute']);
+        Route::put('{attributeId}/options/{optionId}', [EavAttributeController::class, 'updateOptionForAttribute']);
+        Route::delete('{attributeId}/options/{optionId}', [EavAttributeController::class, 'deleteOptionForAttribute']);
+        // Вложенные маршруты для 'eav-attribute-option-value'
+        Route::get('{attributeId}/options/{optionId}/values', [EavAttributeController::class, 'getValuesForOption']);
+        Route::post('{attributeId}/options/{optionId}/values', [EavAttributeController::class, 'storeValueForOption']);
+        Route::put('{attributeId}/options/{optionId}/values/{valueId}', [EavAttributeController::class, 'updateValueForOption']);
+        Route::delete('{attributeId}/options/{optionId}/values/{valueId}', [EavAttributeController::class, 'deleteValueForOption']);
+    });
+
     Route::apiResource('eav-attribute-label', EavAttributeLabelController::class);
     Route::apiResource('eav-attribute-set', EavAttributeSetController::class);
     Route::apiResource('eav-entity-type', EavEntityTypeController::class);
