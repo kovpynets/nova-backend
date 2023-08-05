@@ -52,8 +52,6 @@ class EavAttributeController extends Controller
     }
 
 
-
-
     public function show(string $id)
     {
         return EavAttribute::with('attributeLabels')->find($id);
@@ -61,10 +59,44 @@ class EavAttributeController extends Controller
 
     public function update(Request $request, string $id)
     {
+        // Получите данные атрибута и данных меток из запроса
+        $eavAttributeData = $request->get('eavAttribute');
+        $eavAttributeLabelData = $eavAttributeData['attribute_labels'] ?? [];
+
         $eavAttribute = EavAttribute::find($id);
-        $eavAttribute->update($request->all());
+
+        // Обновление атрибута
+        $eavAttribute->update($eavAttributeData);
+
+        // Обновление меток атрибута, если они были предоставлены
+        if (!empty($eavAttributeLabelData)) {
+            foreach ($eavAttributeLabelData as $labelData) {
+                // Если label или locale пусты, пропустите итерацию
+                if (empty($labelData['label']) || empty($labelData['locale'])) {
+                    continue;
+                }
+
+                // Если у метки есть ID, обновите существующую запись. Иначе, создайте новую запись.
+                if (isset($labelData['id'])) {
+                    EavAttributeLabel::where('id', $labelData['id'])
+                        ->update(['label' => $labelData['label']]);
+                } else {
+                    EavAttributeLabel::create([
+                        'attribute_id' => $eavAttribute->id,
+                        'locale' => $labelData['locale'],
+                        'label' => $labelData['label']
+                    ]);
+                }
+            }
+        }
+
+        // Перезагрузите атрибут со связанными данными для возвращения
+        $eavAttribute->load('attributeLabels');
+
         return $eavAttribute;
     }
+
+
 
     public function destroy(string $id)
     {
