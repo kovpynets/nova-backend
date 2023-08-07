@@ -77,9 +77,9 @@ class EavAttribute extends Model
         return $this->hasMany(EavAttributeLabel::class, 'attribute_id', 'id');
     }
 
-   // public function options()
-   // {
-   //     return $this->hasMany(EavAttributeOption::class, 'attribute_id', 'id');
-   // }
+    public function options()
+    {
+        return $this->hasMany(EavAttributeOption::class, 'attribute_id', 'id');
+    }
 
 }
