@@ -164,7 +164,6 @@ class EavAttributeController extends Controller
         return response()->json(['message' => 'Deleted successfully']);
     }
 
-
     public function getOptionsByAttribute(int $attributeId)
     {
         return EavAttributeOption::where('attribute_id', $attributeId)->with('values')->get();
