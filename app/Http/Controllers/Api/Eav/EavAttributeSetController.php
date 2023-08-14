@@ -13,10 +13,8 @@ class EavAttributeSetController extends Controller
     {
         // Загружаем все наборы атрибутов вместе с их группами атрибутов и атрибутами
         $attributeSets = EavAttributeSet::with(['attributeGroups', 'attributes'])->get();
-
         return response()->json($attributeSets);
     }
-
 
     public function store(Request $request)
     {
@@ -36,9 +34,9 @@ class EavAttributeSetController extends Controller
         return $eavAttributeSet;
     }
 
-    public function destroy(EavAttributeSet $attributeSet)
+    public function destroy(EavAttributeSet $attributeSetId)
     {
-        $attributeSet->delete();
+        $attributeSetId->delete();
         return response(null, 204);
     }
 
@@ -46,7 +44,6 @@ class EavAttributeSetController extends Controller
     {
         return $attributeSet->attributeGroups;
     }
-
 
     public function getAttributes($attributeSetId)
     {
