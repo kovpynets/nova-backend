@@ -19,4 +19,7 @@ class EavAttributeGroup extends Model
     {
         return $this->belongsTo(EavAttributeSet::class, 'attribute_set_id', 'id');
     }
+
+
+
 }

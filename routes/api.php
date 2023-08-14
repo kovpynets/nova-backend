@@ -38,11 +38,9 @@ Route::group(['prefix' => 'core'], function () {
     Route::apiResource('catalog-product-entity-text', CatalogProductEntityTextController::class);
     Route::apiResource('catalog-product-entity-decimal', CatalogProductEntityDecimalController::class);
     Route::apiResource('catalog-product-entity-datetime', CatalogProductEntityDatetimeController::class);
-    // Группа маршрутов для 'eav'
     // Группа маршрутов для 'eav-attribute'
     Route::apiResource('eav-attribute', EavAttributeController::class);
     Route::prefix('eav-attribute')->group(function () {
-
         //Route::apiResource('/', EavAttributeController::class);
         // Вложенные маршруты для 'eav-attribute-option'
         Route::get('{attributeId}/options', [EavAttributeController::class, 'getOptionsByAttribute']);
@@ -58,11 +56,23 @@ Route::group(['prefix' => 'core'], function () {
     });
 
     Route::apiResource('eav-attribute-label', EavAttributeLabelController::class);
-    Route::apiResource('eav-attribute-set', EavAttributeSetController::class);
+    //Route::apiResource('eav-attribute-set', EavAttributeSetController::class);
     Route::apiResource('eav-entity-type', EavEntityTypeController::class);
     Route::apiResource('eav-attribute-group', EavAttributeGroupController::class);
     Route::apiResource('eav-entity-attribute', EavEntityAttributeController::class);
     Route::apiResource('eav-attribute-option', EavAttributeOptionController::class);
     Route::apiResource('eav-entity-option-value', EavAttributeOptionValueController::class);
+
+    // Attribute Set Management
+    Route::prefix('eav-attribute-set')->group(function() {
+        Route::apiResource('/', EavAttributeSetController::class);
+        Route::get('{attributeSetId}/attributes', [EavAttributeSetController::class, 'getAttributes']);
+        Route::post('{attributeSetId}/attributes/{attributeId}', [EavAttributeSetController::class, 'addAttribute']);
+        Route::delete('{attributeSetId}/attributes/{attributeId}', [EavAttributeSetController::class, 'removeAttribute']);
+
+        Route::get('{attributeSet}/attribute-group', [EavAttributeSetController::class, 'attributeGroups']);
+
+        //Route::apiResource('{attributeSetId}/attribute-group', EavAttributeGroupController::class)->shallow();
+    });
 });
 
