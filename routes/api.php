@@ -68,12 +68,10 @@ Route::group(['prefix' => 'core'], function () {
         Route::apiResource('/', EavAttributeSetController::class);
         Route::get('{attributeSetId}/attributes', [EavAttributeSetController::class, 'getAttributes']);
         Route::post('{attributeSetId}/attributes/{attributeId}', [EavAttributeSetController::class, 'addAttribute']);
+        Route::get('{attributeSetId}', [EavAttributeSetController::class, 'getAttribute']);
         Route::delete('{attributeSetId}', [EavAttributeSetController::class, 'destroy']);
         Route::delete('{attributeSetId}/attributes/{attributeId}', [EavAttributeSetController::class, 'removeAttribute']);
-
         Route::get('{attributeSet}/attribute-group', [EavAttributeSetController::class, 'attributeGroups']);
-
-        //Route::apiResource('{attributeSetId}/attribute-group', EavAttributeGroupController::class)->shallow();
     });
 });
 

@@ -16,6 +16,7 @@ class EavAttributeSetController extends Controller
         return response()->json($attributeSets);
     }
 
+
     public function store(Request $request)
     {
         $eavAttributeSet = EavAttributeSet::create($request->all());
@@ -25,6 +26,12 @@ class EavAttributeSetController extends Controller
     public function show(EavAttributeSet $attributeSet)
     {
         return $attributeSet;
+    }
+
+
+    public function getAttribute(int $id)
+    {
+        return EavAttributeSet::find($id);
     }
 
     public function update(Request $request, string $id)
